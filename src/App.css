@@ -51,6 +51,18 @@
   cursor: pointer;
 }
 
+.med {
+  min-width: 2vw;
+  min-height: 2vw;
+  font-size: 8px;
+}
+
+.lg {
+  min-width: 1.2vw;
+  min-height: 1.2vw;
+  font-size: 5px;
+}
+
 .active {
   background-color: rgb(27, 219, 194);
 }

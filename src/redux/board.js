@@ -1,4 +1,4 @@
-const makeBoard = (n) => {
+const makeBoard = (n, mines) => {
     //Tile Template
     let tile = {
         size: n, //nxn board
@@ -20,7 +20,7 @@ const makeBoard = (n) => {
     
     //Place 10 random mines and store mineTiles
     let mineTiles = [];
-    for (let i = 0; i < n; i ++) {
+    for (let i = 0; i < mines; i ++) {
         let placed = false;
         while (placed === false) {
             let randomRow = Math.floor(Math.random() * n);
@@ -47,7 +47,6 @@ const makeBoard = (n) => {
     }
     return [board, mineTiles];
 }
-
 
 /*HELPER FUNCTIONS*/
 

@@ -2,6 +2,7 @@ import React from 'react';
 import './App.css';
 import { connect } from 'react-redux';
 import { Tile } from './Tile.js';
+import GameSelector from './GameSelector.js';
 import { togglePiece, toggleMinePiece, youAreWinner, toggleFlag } from './redux/actions.js';
 import { adjDirections, addTups } from './redux/board.js';
 
@@ -9,7 +10,7 @@ const mapStateToProps = store => {
   return store
 }
 
-function App({ board, mineTiles, gameOver, dispatch, revealedCount, youWon }) {
+function App({ board, mineTiles, gameOver, dispatch, revealedCount, youWon, playing, boardSize }) {
 
   const recursiveRevealer = (index) => {
     if (index === null || board[index[0]][index[1]].checked) {
@@ -45,7 +46,7 @@ function App({ board, mineTiles, gameOver, dispatch, revealedCount, youWon }) {
   }
 
   const checkBoardForWin = () => {
-    if (revealedCount === 90) {
+    if (boardSize !== 0 && revealedCount === (Math.pow(boardSize, 2) - boardSize)) {
       dispatch(youAreWinner());
     }
   }
@@ -57,10 +58,11 @@ function App({ board, mineTiles, gameOver, dispatch, revealedCount, youWon }) {
   return (
     <div>
       { checkBoardForWin() }
-      <h1>Will You Be Mine-Sweeper?</h1>
-      <h2>{gameOver ? 'You Lost 😭' : null}</h2>
-      <h2>{youWon ? 'You Done Did It 😎' : null}</h2>
-      <div className="board-container">
+      <h1>{gameOver || youWon ? null : 'Will You Be Mine-Sweeper?'}</h1>
+      <h1>{gameOver ? 'You Lost 😭' : null}</h1>
+      <h1>{youWon ? 'You Done Did It 😎' : null}</h1>
+      <GameSelector />
+      {playing && <div className="board-container">
         {board.map((row, i) => {
           return (
             <div key = {i} className="row" >
@@ -68,12 +70,13 @@ function App({ board, mineTiles, gameOver, dispatch, revealedCount, youWon }) {
                 <Tile 
                   handleClick={() => handlePieceToggle([i, j])} 
                   handleRightClick={() => handlePieceFlag([i, j])}
+                  boardSize={boardSize}
                   key={j} data={tile}/>
                 )}
             </div>
           )
         })}
-      </div>
+      </div>}
     </div>
   );
 }

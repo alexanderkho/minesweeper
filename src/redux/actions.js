@@ -24,3 +24,10 @@ export function toggleFlag (index) {
         payload: index
     }
 }
+
+export function initGame (boardInfo) {
+    return {
+        type: 'INIT_GAME',
+        payload: boardInfo
+    }
+}

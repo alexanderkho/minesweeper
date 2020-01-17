@@ -1,10 +1,12 @@
 import { makeBoard, updateTile } from './board.js';
 
-let newBoard = makeBoard(10);
+// let newBoard = makeBoard(10);
 
 const initialState = {
-    board: newBoard[0],
-    mineTiles: newBoard[1],
+    playing: false,
+    board: null,
+    boardSize: 0,
+    mineTiles: null,
     gameOver: false,
     youWon: false,
     revealedCount: 0
@@ -13,6 +15,16 @@ const initialState = {
 const rootReducer = (state=initialState, action) => {
     let newState;
     switch (action.type) {
+        case 'INIT_GAME':
+            const board = makeBoard(...action.payload);
+            newState = {
+                ...state,
+                playing: true,
+                board: board[0],
+                mineTiles: board[1],
+                boardSize: action.payload[0]
+            }
+            break;
         case 'TOGGLE_PIECE':
             newState = {
                 ...state, 
