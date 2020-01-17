@@ -36,3 +36,39 @@
     transform: rotate(360deg);
   }
 }
+
+.tile {
+  display: inline-block;
+  background-color: grey;
+  min-width: 4vw;
+  min-height: 4vw;
+  margin: 0;
+  padding: 0;
+  border: solid 0.5px;
+  vertical-align:top; 
+  text-align: center;
+  line-height: 300%;
+  cursor: pointer;
+}
+
+.active {
+  background-color: rgb(27, 219, 194);
+}
+
+.mine {
+  background-color: pink;
+}
+
+.flagged {
+  background-color: rgb(214, 30, 184);
+}
+
+.row {
+  margin-bottom: 0%;
+  padding: 0;
+  vertical-align:top; 
+}
+
+.board-container {
+  vertical-align:top; 
+}
